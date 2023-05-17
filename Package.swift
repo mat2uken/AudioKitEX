@@ -7,7 +7,7 @@ let package = Package(
     name: "AudioKitEX",
     platforms: [.macOS(.v12), .iOS(.v13), .tvOS(.v13)],
     products: [.library(name: "AudioKitEX", targets: ["AudioKitEX"])],
-    dependencies: [.package(url: "https://github.com/mat2uken/AudioKit", from: "v1.5.8-ae")],
+    dependencies: [.package(url: "https://github.com/mat2uken/AudioKit", from: "5.5.0")],
     targets: [
         .target(name: "AudioKitEX", dependencies: ["AudioKit", "CAudioKitEX"]),
         .target(name: "CAudioKitEX", cxxSettings: [.headerSearchPath(".")]),
