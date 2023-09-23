@@ -4,6 +4,7 @@
 #import "ParameterRamper.h"
 #import <map>
 #import <string>
+#include <cassert>
 
 AUInternalRenderBlock internalRenderBlockDSP(DSPRef pDSP)
 {

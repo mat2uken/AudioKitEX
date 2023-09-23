@@ -2,6 +2,7 @@
 
 #include "DSPBase.h"
 #include "ParameterRamper.h"
+#include <cassert>
 
 enum FaderParameter : AUParameterAddress {
     FaderParameterLeftGain,
