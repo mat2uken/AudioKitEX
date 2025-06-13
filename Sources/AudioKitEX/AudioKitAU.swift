@@ -17,6 +17,9 @@ open class AudioKitAU: AUAudioUnit {
     public var supportedLeftChannelCount: NSNumber = 2
     public var supportedRightChannelCount: NSNumber = 2
 
+    // Track state of DSP life cycle
+    private var isDeinitialized = false
+
     override public var channelCapabilities: [NSNumber]? {
         return [supportedLeftChannelCount, supportedRightChannelCount]
     }
@@ -43,9 +46,12 @@ open class AudioKitAU: AUAudioUnit {
         }
     }
     
-    /// Delllocate Render Resources
+    /// Deallocate Render Resources
     override public func deallocateRenderResources() {
         super.deallocateRenderResources()
+        if isDeinitialized {
+            return
+        }
         deallocateRenderResourcesDSP(dsp)
         internalBuffers = []
     }
@@ -147,7 +153,11 @@ open class AudioKitAU: AUAudioUnit {
     }
     
     deinit {
-        deleteDSP(dsp)
+        if !isDeinitialized {
+            isDeinitialized = true
+            deleteDSP(dsp)
+            dsp = nil
+        }
     }
     
     // MARK: AudioKit
